@@ -8,17 +8,33 @@ public class Main {
         int capacity = getUserInputForCapacity(); //call getUserInputForCapacity method to get the capacity of array1.
 
         int[] array1 = new int[capacity]; //declare an array with a capacity of (capacity) elements
+        int[] array2 = new int[capacity];
         fillArray(array1); //call fillArray function on array1
+        fillArray(array2); //call fillArray function on array2
+        System.out.println("Array 1");
         printArray(array1); //call printArray function on array1
+        System.out.println();
+        System.out.println("Array 2");
+        printArray(array2); //call printArray function on array1
 
         System.out.println("\n");//two empty nl
+
         long mergeSortStartTime = System.nanoTime(); //start time for mergeSort method call
         mergeSort(array1); //call mergeSort function on array1
         long mergeSortEndTime = System.nanoTime(); // end time for mergeSort method call
         long mergeSortDuration = mergeSortEndTime - mergeSortStartTime;
         System.out.println("Merge sort elapsed time: " + mergeSortDuration + " nanoseconds, which is "
                 + TimeUnit.NANOSECONDS.toMillis(mergeSortDuration) + " milliseconds."); // print elapsed time in nanoseconds and milliseconds
+        printArray(array1); // call printArray function on array1
 
+        System.out.println("\n");//two empty nl
+
+        long insertionSortStartTime = System.nanoTime(); //start time for insertionSort method call
+        insertionSort(array1); //call insertionSort function on array1
+        long insertionSortEndTime = System.nanoTime(); // end time for insertionSort method call
+        long insertionSortDuration = insertionSortEndTime - insertionSortStartTime;
+        System.out.println("Insertion sort sort elapsed time: " + insertionSortDuration + " nanoseconds, which is "
+                + TimeUnit.NANOSECONDS.toMillis(insertionSortDuration) + " milliseconds."); // print elapsed time in nanoseconds and milliseconds
         printArray(array1); // call printArray function on array1
     }
 
@@ -50,7 +66,7 @@ public class Main {
     static void fillArray(int[] array){ // utility method used for filling array with random ints
         Random rand = new Random(); //create new random object
         for (int i = 0; i < array.length; i++){ //iterate as long as i < array capacity
-            array[i] = rand.nextInt(array.length + 1); //random int between 0 and length of array + 1 (inclusive)
+            array[i] = rand.nextInt(100001); //random int between 0 and length of array + 1 (inclusive)
         }
     }
 
@@ -92,7 +108,7 @@ public class Main {
         }
     }
 
-    static void mergeSort(int[] arr){
+    static void mergeSort(int[] arr){ //O(nlogn)
         //this method handles the division of arrays by two. it will recursively make divisions until arr.length <= 1.
         if (arr.length <= 1){ //if array length is <= 1
             return; //base case
@@ -118,9 +134,16 @@ public class Main {
     }
 
     //NEXT METHOD IS INSERTION SORT METHOD
-    static void insertionSort(int[] arr){ //TODO
+    static void insertionSort(int[] arr){ //O(n^2)
         int length = arr.length;
-        for (int i = 1; i < length; i++){
+        for (int i = 1; i < length; i++){ //loop between element at index 1 and the last element
+            int temporary = arr[i];
+            int j = i - 1; //set j = to i - 1
+            while (j >= 0 && arr[j] > temporary){ //while j >= 0 and arr at index j is > temporary
+                arr[j + 1] = arr[j]; //set arr [j+1] = to arr[j]
+                j--; //decrement j
+            }
+            arr[j+1] = temporary;
 
         }
     }
