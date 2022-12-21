@@ -33,7 +33,7 @@ public class Main {
         insertionSort(array1); //call insertionSort function on array1
         long insertionSortEndTime = System.nanoTime(); // end time for insertionSort method call
         long insertionSortDuration = insertionSortEndTime - insertionSortStartTime;
-        System.out.println("Insertion sort sort elapsed time: " + insertionSortDuration + " nanoseconds, which is "
+        System.out.println("Insertion sort elapsed time: " + insertionSortDuration + " nanoseconds, which is "
                 + TimeUnit.NANOSECONDS.toMillis(insertionSortDuration) + " milliseconds."); // print elapsed time in nanoseconds and milliseconds
         printArray(array1); // call printArray function on array1
     }
@@ -66,7 +66,7 @@ public class Main {
     static void fillArray(int[] array){ // utility method used for filling array with random ints
         Random rand = new Random(); //create new random object
         for (int i = 0; i < array.length; i++){ //iterate as long as i < array capacity
-            array[i] = rand.nextInt(100001); //random int between 0 and length of array + 1 (inclusive)
+            array[i] = rand.nextInt(100001); //random int between 0 and 100001(exclusive)
         }
     }
 
@@ -143,7 +143,7 @@ public class Main {
                 arr[j + 1] = arr[j]; //set arr [j+1] = to arr[j]
                 j--; //decrement j
             }
-            arr[j+1] = temporary;
+            arr[j + 1] = temporary;
 
         }
     }
